@@ -15,28 +15,51 @@
 <dt-article>
   <h1>Slow Feature Analysis</h1>
   <h2>A review of work on Slow Feature Analysis (SFA) to consider its application in recognition tasks in Human Activity Recognition (HAR).</h2>
+  
   <dt-byline></dt-byline>
+  
   <h2>Introduction</h2>
-  <p>SFA solves the optimisation problem of learning the non-linear functions g(x), which transforms a time-varying input signal x(t) into a slowly-varying output signal y(t).
+  <p>The slowness principle was developed as hypothesis for the functioning of the visual cortex in the brain, which is reponsible for processing visual information<dt-cite key="Wiskott2002"></dt-cite>.
+  </p>
+  <p>SFA solves the optimisation problem of learning the non-linear functions g(x), which transforms a time-varying input signal x(t) into a slowly-varying output signal y(t).</p>
+  
   <h2>Method</h2>
   <p>This is the first paragraph of the article.</p>
   <p>We can also cite <dt-cite key="Sprekeler2008"></dt-cite> external publications.</p>
+  
+  <h2>Implementation</h2>
+  <p>The Modular Toolkit for Data Processing<dt-fn>http://mdp-toolkit.sourceforge.net</dt-fn> (MDP) contains an implementation of SFA in Python.</p>
 </dt-article>
 
 <dt-appendix>
 </dt-appendix>
 
 <script type="text/bibliography">
-@article{Sprekeler2008,
-	abstract = {Slow feature analysis is an algorithm for unsupervised learning of invariant representations from data with temporal correlations. Here, we present a mathematical analysis of slow feature analysis for the case where the input-output functions are not restricted in complexity. We show that the optimal functions obey a partial differential eigenvalue problem of a type that is common in theoretical physics. This analogy allows the transfer of mathematical techniques and intuitions from physics to concrete applications of slow feature analysis, thereby providing the means for analytical predictions and a better understanding of simulation results. We put particular emphasis on the situation where the input data are generated from a set of statistically independent sources. The dependence of the optimal functions on the sources is calculated analytically for the cases where the sources have Gaussian or uniform distribution.},
-	author = {Sprekeler, Henning and Wiskott, Laurenz},
-	doi = {10.2139/ssrn.3076122},
-	issn = {1556-5068},
-	journal = {SSRN Electronic Journal},
-	mendeley-groups = {Slow Feature Analysis},
-	title = {{Understanding Slow Feature Analysis: A Mathematical Framework}},
-	url = {https://www.ssrn.com/abstract=3076122},
-	year = {2008}
-}
+	@article{Wiskott2002,
+		abstract = {Invariant features of temporally varying signals are useful for analysis and classification. Slow feature analysis (SFA) is a new method for learning invariant or slowly varying features from a vectorial input signal. It is based on a nonlinear expansion of the input signal and application of principal component analysis to this expanded signal and its time derivative. It is guaranteed to find the optimal solution within a family of functions directly and can learn to extract a large number of decorrelated features, which are ordered by their degree of invariance. SFA can be applied hierarchically to process high-dimensional input signals and extract complex features. SFA is applied first to complex cell tuning properties based on simple cell output, including disparity and motion. Then more complicated input-output functions are learned by repeated application of SFA. Finally, a hierarchical network of SFA modules is presented as a simple model of the visual system. The same unstructured network can learn translation, size, rotation, contrast, or, to a lesser degree, illumination invariance for one-dimensional objects, depending on only the training stimulus. Surprisingly, only a few training objects suffice to achieve good generalization to new objects. The generated representation is suitable for object recognition. Performance degrades if the network is trained to learn multiple invariances simultaneously.},
+		author = {Wiskott, Laurenz and Sejnowski, Terrence J.},
+		doi = {10.1162/089976602317318938},
+		file = {:D$\backslash$:/GoogleDrive/UoS/Human Activity Recognition/Slow{\_}Features/papers/wiskott{\_}sejnowski{\_}2002{\_}Slow{\_}Feature{\_}Analysis.pdf:pdf},
+		issn = {08997667},
+		journal = {Neural Computation},
+		mendeley-groups = {Slow Feature Analysis},
+		number = {4},
+		pages = {715--770},
+		title = {{Slow feature analysis: Unsupervised learning of invariances}},
+		volume = {14},
+		year = {2002}
+	}
+
+	@article{Sprekeler2008,
+		abstract = {Slow feature analysis is an algorithm for unsupervised learning of invariant representations from data with temporal correlations. Here, we present a mathematical analysis of slow feature analysis for the case where the input-output functions are not restricted in complexity. We show that the optimal functions obey a partial differential eigenvalue problem of a type that is common in theoretical physics. This analogy allows the transfer of mathematical techniques and intuitions from physics to concrete applications of slow feature analysis, thereby providing the means for analytical predictions and a better understanding of simulation results. We put particular emphasis on the situation where the input data are generated from a set of statistically independent sources. The dependence of the optimal functions on the sources is calculated analytically for the cases where the sources have Gaussian or uniform distribution.},
+		author = {Sprekeler, Henning and Wiskott, Laurenz},
+		doi = {10.2139/ssrn.3076122},
+		issn = {1556-5068},
+		journal = {SSRN Electronic Journal},
+		mendeley-groups = {Slow Feature Analysis},
+		title = {{Understanding Slow Feature Analysis: A Mathematical Framework}},
+		url = {https://www.ssrn.com/abstract=3076122},
+		year = {2008}
+	}
 
 </script>
