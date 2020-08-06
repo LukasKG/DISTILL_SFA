@@ -2,9 +2,17 @@
 <meta charset="utf-8">
 <script src="https://distill.pub/template.v1.js"></script>
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+<script async="" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 <script type="text/front-matter">
   title: "Slow Feature Analysis"
-  description: "A review of work on Slow Feature Analysis (SFA) to consider its application in recognition tasks in Human Activity Recognition (HAR)."
+  description: "A review of work on Slow Feature Analysis (SFA) to consider its application for classification tasks in Human Activity Recognition (HAR)."
   authors:
   - Lukas Günthermann
   affiliations:
@@ -14,18 +22,93 @@
 
 <dt-article>
   <h1>Slow Feature Analysis</h1>
-  <h2>A review of work on Slow Feature Analysis (SFA) to consider its application in recognition tasks in Human Activity Recognition (HAR).</h2>
+  <h2>A review of work on Slow Feature Analysis (SFA) to consider its application for classification tasks in Human Activity Recognition (HAR).</h2>
   
   <dt-byline></dt-byline>
   
   <h2>Introduction</h2>
-  <p>The slowness principle was developed as hypothesis for the functioning of the visual cortex in the brain, which is reponsible for processing visual information<dt-cite key="Wiskott2002"></dt-cite>.
+  <p>
+  The slowness principle was developed as hypothesis for the functioning of the visual cortex in the brain, which is reponsible for processing visual information <dt-cite key="Wiskott2002"></dt-cite>.
+  In that case, the goal is identifying the external causes of changes in the visual experience. Applied to HAR, it could be used to identify the underlying consistent attributes of frequently changing sensor signals.
   </p>
-  <p>SFA solves the optimisation problem of learning the non-linear functions g(x), which transforms a time-varying input signal x(t) into a slowly-varying output signal y(t).</p>
+  
   
   <h2>Method</h2>
-  <p>This is the first paragraph of the article.</p>
-  <p>We can also cite <dt-cite key="Sprekeler2008"></dt-cite> external publications.</p>
+  
+  <figure class="centered">
+    <d-figure><img src="img/400px-SlowFeatureAnalysis-OptimizationProblem.png"></d-figure>
+    <figcaption>
+			The optimisation problem solved by Slow Feature Analysis. <dt-cite key="Wiskott2011"></dt-cite>
+    </figcaption>
+   </figure>
+  
+  <p>
+  \(\begin{align}
+  y_j(t) := g_j(x(t))
+  \label{eq:output}\
+  \end{align}\)
+  </p>
+  
+  <p>
+  SFA solves the optimisation problem of learning the non-linear functions g(x), which transforms a time-varying input signal x(t) into a slowly-varying output signal y(t). 
+  This extraction must occur instantaneously as shown in \eqref{eq:output} to prevent solutions, which smooth input over time, e.g. a moving average filter. <dt-cite key="Sprekeler2008"></dt-cite>
+  </p>
+
+  <p>
+  \(\begin{align}
+  \Delta(y_j) := \langle \dot{y}_j^2 \rangle_t
+  \label{eq:minimisation}\
+  \end{align}\)
+  </p>
+  
+  <p>
+  The Δ-value in \eqref{eq:minimisation} represents the objective to be minimised. 
+  The slowness of the output signal is measured as the time average of its squared derivative, low values indicating slowly-varying signals.
+  The output signal underlies the following constraints:
+  </p>
+  
+  <p>
+  \(\begin{align}
+  \langle y_j \rangle_t = 0
+  \label{eq:zero_mean}\
+  \end{align}\)
+  </p>
+  
+  <p>
+  \(\begin{align}
+  \langle y^2_j \rangle_t = 1
+  \label{eq:unit_variance}\
+  \end{align}\)
+  </p>
+  
+  <p>
+  \(\begin{align}
+  \forall i < j : \langle y_iy_j \rangle_t = 0
+  \label{eq:deco_order}\
+  \end{align}\)
+  </p>
+  
+  <p>
+  All output signals must have \eqref{eq:zero_mean} a mean of zero and \eqref{eq:unit_variance} unit variance, in order to make their temporal derivative directly comparable. 
+  This also prevents the constant solution, which does not offer any information due to its infinitely slowness.
+  Furthermore, the output signals must be \eqref{eq:deco_order} decorrelated from each other so that each signal conveys unique information.
+  </p>
+  
+  <h2>Application</h2>
+  
+  <h3>Human Action Recognition</h3>
+  <p>
+  Different forms of SFA are applied to regognise the actions of cuboids sampled from video recordings <dt-cite key="Zhang2012"></dt-cite>. 
+  These forms include the traditional unsupervised training method, but also methods using weakly supervised information and spatial information to allow action classification.
+  Multiclass SVMs are used for classification. The results show that SFA improved the classification performance.
+  </p>
+  
+  <h3>Human Fall Detection</h3>
+  <p>
+  Detecting falls of elderly people is a widespread application of HAR methods. 
+  Fan et al. use SFA to transform shape feature sequences, extracted from video recordings, into discriminative information <dt-cite key="Fan2019"></dt-cite>. 
+  Their results compare to other state-of-the-art methods.
+  </p>
   
   <h2>Implementation</h2>
   <p>The Modular Toolkit for Data Processing<dt-fn>http://mdp-toolkit.sourceforge.net</dt-fn> (MDP) contains an implementation of SFA in Python.</p>
@@ -61,5 +144,56 @@
 		url = {https://www.ssrn.com/abstract=3076122},
 		year = {2008}
 	}
+	
+	@article{Wiskott2011,
+		abstract = {Slow feature analysis (SFA) is an unsupervised learning algorithm for extracting slowly varying features from a quickly varying input signal. It has been successfully applied, e.g., to the self-organization of complex-cell receptive fields, the recognition of whole objects invariant to spatial transformations, the self-organization of place-cells, extraction of driving forces, and to nonlinear blind source separation.},
+		author = {Wiskott, Laurenz and Berkes, Pietro and Franzius, Mathias and Sprekeler, Henning and Wilbert, Niko},
+		doi = {10.4249/scholarpedia.5282},
+		issn = {1941-6016},
+		journal = {Scholarpedia},
+		mendeley-groups = {Slow Feature Analysis},
+		number = {4},
+		pages = {5282},
+		title = {{Slow feature analysis}},
+		url = {http://www.scholarpedia.org/article/Slow{\_}feature{\_}analysis},
+		volume = {6},
+		year = {2011}
+	}
 
+	@article{Zhang2012,
+		abstract = {Slow Feature Analysis (SFA) extracts slowly varying features from a quickly varying input signal [1]. It has been successfully applied to modeling the visual receptive fields of the cortical neurons. Sufficient experimental results in neuroscience suggest that the temporal slowness principle is a general learning principle in visual perception. In this paper, we introduce the SFA framework to the problem of human action recognition by incorporating the discriminative information with SFA learning and considering the spatial relationship of body parts. In particular, we consider four kinds of SFA learning strategies, including the original unsupervised SFA (U-SFA), the supervised SFA (S-SFA), the discriminative SFA (D-SFA), and the spatial discriminative SFA (SD-SFA), to extract slow feature functions from a large amount of training cuboids which are obtained by random sampling in motion boundaries. Afterward, to represent action sequences, the squared first order temporal derivatives are accumulated over all transformed cuboids into one feature vector, which is termed the Accumulated Squared Derivative (ASD) feature. The ASD feature encodes the statistical distribution of slow features in an action sequence. Finally, a linear support vector machine (SVM) is trained to classify actions represented by ASD features. We conduct extensive experiments, including two sets of control experiments, two sets of large scale experiments on the KTH and Weizmann databases, and two sets of experiments on the CASIA and UT-interaction databases, to demonstrate the effectiveness of SFA for human action recognition. Experimental results suggest that the SFA-based approach 1) is able to extract useful motion patterns and improves the recognition performance, 2) requires less intermediate processing steps but achieves comparable or even better performance, and 3) has good potential to recognize complex multiperson activities. {\textcopyright} 2012 IEEE.},
+		archivePrefix = {arXiv},
+		arxivId = {1907.06670},
+		author = {Zhang, Zhang and Tao, Dacheng},
+		doi = {10.1109/TPAMI.2011.157},
+		eprint = {1907.06670},
+		issn = {01628828},
+		journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+		keywords = {Human action recognition,slow feature analysis},
+		mendeley-groups = {Slow Feature Analysis},
+		number = {3},
+		pages = {436--450},
+		title = {{Slow feature analysis for human action recognition}},
+		volume = {34},
+		year = {2012}
+	}
+
+	@article{Fan2019,
+		abstract = {Falls are reported to be the leading causes of accidental deaths among elderly people. Automatic detection of falls from video sequences is an assistant technology for low-cost health care systems. In this paper, we present a novel slow feature analysis based framework for fall detection in a house care environment. Firstly, a foreground human body is extracted by a background subtraction technique. After morphological operations, the human silhouette is refined and covered by a fitted ellipse. Secondly, six shape features are quantified from the covered silhouette to represent different human postures. With the help of the learned slow feature functions, the shape feature sequences are transformed into slow feature sequences with discriminative information about human actions. To represent the fall incidents, the squared first order temporal derivatives of the slow features are accumulated into a classification vector. Lastly, falls are distinguished from other daily actions, such as walking, crouching, and sitting, by the trained directed acyclic graph support vector machine. Experiments on the multiple-camera fall dataset and the SDUFall dataset demonstrate that our method is comparable to other state-of-the-art methods, achieving 94.00{\%} recognition rate on the former dataset and 96.57{\%} on the latter one.},
+		author = {Fan, Kaibo and Wang, Ping and Zhuang, Shuo},
+		doi = {10.1007/s11042-018-5638-9},
+		file = {:D$\backslash$:/GoogleDrive/UoS/Human Activity Recognition/Slow{\_}Features/papers/fan2018{\_}human{\_}fall{\_}detection.pdf:pdf},
+		issn = {1380-7501},
+		journal = {Multimedia Tools and Applications},
+		keywords = {Background subtraction,Fall detection,Human silhouette,Slow feature analysis,Support vector machine},
+		mendeley-groups = {Slow Feature Analysis},
+		month = {apr},
+		number = {7},
+		pages = {9101--9128},
+		title = {{Human fall detection using slow feature analysis}},
+		url = {http://link.springer.com/10.1007/s11042-018-5638-9},
+		volume = {78},
+		year = {2019}
+	}
+	
 </script>
