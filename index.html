@@ -51,7 +51,8 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
   
   <p>
   SFA solves the optimisation problem of learning the non-linear functions g(x), which transforms a time-varying input signal x(t) into a slowly-varying output signal y(t). 
-  This extraction must occur instantaneously as shown in \eqref{eq:output} to prevent solutions, which smooth input over time, e.g. a moving average filter. <dt-cite key="Sprekeler2008"></dt-cite>
+  This extraction must occur instantaneously as shown in \eqref{eq:output} to prevent solutions, which smooth input over time, e.g. a moving average filter. 
+  SFA is guaranteed to find the optimal solution within the considered function space <dt-cite key="Sprekeler2008"></dt-cite>.
   </p>
 
   <p>
@@ -96,18 +97,31 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
   
   <h2>Application</h2>
   
-  <h3>Human Action Recognition</h3>
+  <h3>Human Action Recognition <dt-cite key="Zhang2012"></dt-cite></h3>
   <p>
-  Different forms of SFA are applied to regognise the actions of cuboids sampled from video recordings <dt-cite key="Zhang2012"></dt-cite>. 
+  Different forms of SFA are applied to regognise the actions of cuboids sampled from video recordings. 
   These forms include the traditional unsupervised training method, but also methods using weakly supervised information and spatial information to allow action classification.
   Multiclass SVMs are used for classification. The results show that SFA improved the classification performance.
   </p>
   
-  <h3>Human Fall Detection</h3>
+  <h3>Human Fall Detection <dt-cite key="Fan2019"></dt-cite></h3>
   <p>
   Detecting falls of elderly people is a widespread application of HAR methods. 
-  Fan et al. use SFA to transform shape feature sequences, extracted from video recordings, into discriminative information <dt-cite key="Fan2019"></dt-cite>. 
+  Fan et al. use SFA to transform shape feature sequences, extracted from video recordings, into discriminative information. 
   Their results compare to other state-of-the-art methods.
+  </p>
+  
+  <h3>Behaviour Analysis <dt-cite key="Zafeiriou2013"></dt-cite></h3>
+  <p>
+  Zafeiriou et al. propose a probabilistic SFA algorithm, which combines slow varying latent space with dynamic time warping techniques to achieve robust sequence time-alignment.
+  The method is applied to detect facial action units in the MMI database.
+  </p>
+  
+  <h3>Gesture Recognition <dt-cite key="Koch2010"></dt-cite></h3>
+  <p>
+  Application on time series stemming from the acceleration sensors of a Bluetooth Wiimote controller.
+  The results compare to state-of-the-art Random Forest classifier with less requiered computation time.
+  They found that too few training patterns result in overfitting, which can be overcome by using parametric bootstrap.
   </p>
   
   <h2>Implementation</h2>
@@ -196,4 +210,36 @@ TeX: { equationNumbers: { autoNumber: "AMS" } }
 		year = {2019}
 	}
 	
+	@inproceedings{Zafeiriou2013,
+		abstract = {A recently introduced latent feature learning technique for time varying dynamic phenomena analysis is the so called Slow Feature Analysis (SFA). SFA is a deterministic component analysis technique for multi-dimensional sequences that by minimizing the variance of the first order time derivative approximation of the input signal finds uncorrelated projections that extract slowly-varying features ordered by their temporal consistency and constancy. In this paper, we propose a number of extensions in both the deterministic and the probabilistic SFA optimization frameworks. In particular, we derive a novel deterministic SFA algorithm that is able to identify linear projections that extract the common slowest varying features of two or more sequences. In addition, we propose an Expectation Maximization (EM) algorithm to perform inference in a probabilistic formulation of SFA and similarly extend it in order to handle two and more time varying data sequences. Moreover, we demonstrate that the probabilistic SFA (EMSFA) algorithm that discovers the common slowest varying latent space of multiple sequences can be combined with dynamic time warping techniques for robust sequence time alignment. The proposed SFA algorithms were applied for facial behavior analysis demonstrating their usefulness and appropriateness for this task. {\textcopyright} 2013 IEEE.},
+		author = {Zafeiriou, Lazaros and Nicolaou, Mihalis A. and Zafeiriou, Stefanos and Nikitidis, Symeon and Pantic, Maja},
+		booktitle = {2013 IEEE International Conference on Computer Vision},
+		doi = {10.1109/ICCV.2013.353},
+		file = {:D$\backslash$:/GoogleDrive/UoS/Human Activity Recognition/Slow{\_}Features/papers/Zafeiriou2013.pdf:pdf},
+		isbn = {978-1-4799-2840-8},
+		keywords = {Component Analysis,Slow Feature Analysis},
+		mendeley-groups = {Slow Feature Analysis},
+		month = {dec},
+		pages = {2840--2847},
+		publisher = {IEEE},
+		title = {{Learning Slow Features for Behaviour Analysis}},
+		url = {http://ieeexplore.ieee.org/document/6751464/},
+		year = {2013}
+	}
+
+	@article{Koch2010,
+		abstract = {Slow Feature Analysis (SFA) has been established as a robust and versatile technique from the neurosciences to learn slowly varying functions from quickly changing signals. Recently, the method has been also applied to classification tasks. Here we apply SFA for the first time to a time series classification problem originating from gesture recognition. The gestures used in our experiments are based on acceleration signals of the Bluetooth Wiimote controller (Nintendo). We show that SFA achieves results comparable to the well-known Random Forest predictor in shorter computation time, given a sufficient number of training patterns. However - and this is a novelty to SFA classification - we discovered that SFA requires the number of training patterns to be strictly greater than the dimension of the nonlinear function space. If too few patterns are available, we find that the model constructed by SFA severely overfits and leads to high test set errors. We analyze the reasons for overfitting and present a new solution based on parametric bootstrap to overcome this problem. {\textcopyright} 2010 IEEE.},
+		author = {Koch, Patrick and Konen, Wolfgang and Hein, Kristine},
+		doi = {10.1109/IJCNN.2010.5596842},
+		file = {:D$\backslash$:/GoogleDrive/UoS/Human Activity Recognition/Slow{\_}Features/papers/Gesture{\_}Recognition.pdf:pdf},
+		isbn = {9781424469178},
+		journal = {Proceedings of the International Joint Conference on Neural Networks},
+		mendeley-groups = {Slow Feature Analysis},
+		number = {3},
+		pages = {1--8},
+		publisher = {IEEE},
+		title = {{Gesture recognition on few training data using slow feature analysis and parametric bootstrap}},
+		year = {2010}
+	}
+
 </script>
